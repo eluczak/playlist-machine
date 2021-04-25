@@ -1,0 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
+
+h1 {
+	color:orange;
+}
+
+fieldset {
+	padding:2em;
+	border-radius: 0.3em;
+	background-color: rgba(255, 255, 255, 0.65);
+	border: 1px solid #bc7e66;
+}
+
+form input[type="text"],
+form input[type="number"] {
+	background: white;
+		border: solid 1px #d2d7dc;
+		border-radius: 0.35em;
+		width: 80%;
+		height: 2em;
+		padding: 5px;
+}
+
+form input[type="submit"] {
+	color: #bc7e66;
+		background: none;
+		border: solid 1px #bc7e66;
+		border-radius: 0.35em;
+		padding: 1em 2em 1em 2em;
+		transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
+		
+	}
+
+
+input[type="submit"]:hover {
+	color: #f35858;
+	background: rgba(255, 255, 255, 0.8);
+	border-color: rgba(243, 88, 88, 0.5);
+}
+
+body {
+	font-family: Open Sans;
+	background-image: url("assets/images/overlay.png"), linear-gradient(75deg, #FF7088 15%, #F2B69D 55%)
+}
+.content_area {
+	margin-left: 25%;
+	margin-right: 25%;
+	background-color: none;
+	padding: 5em;
+	border-radius: 0.35em;
+}
+
+
+/* Tooltip container */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 500px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+
+  /* Position the tooltip text */
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+
+  /* Fade in tooltip */
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+} 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Preview</title>
+</head>
+<body>
+    <h1>Preview</h1>
+    {% for item in playlist_preview %}
+        <p>{{ item }}</p>
+    {% endfor %}
+    <form method=get action="{{ url_for('save_playlist') }}">
+    <p><button>Save a playlist</button></p>
+    </form>
+    <form method=get action="{{ url_for('index') }}">
+        <p><button>Generate another one</button></p>
+    </form>
+</body>
+</html>

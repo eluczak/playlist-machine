@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../../static/styles.css" />
+	<title>Playlist machine</title>
+</head>
+<body>
+<div class="content_area">
+    <form method=post action="{{ url_for('preview') }}">
+    <fieldset>
+    <h1>Playlist machine</h1>
+    <h2>Instructions</h2>
+    <ol>
+        <li>Provide 1 artist name, 1 track name and up to 3 genres. These are required fields.</li>
+        <li>Optionally set up values of audio features.</li>
+        <li>Choose a name for your playlist (required field)</li>
+        <li>A preview will be generated. If you think you like the tracks, click "Save" and your new playlist will be
+            created in your Spotify account.</li>
+    </ol>
+
+        <br><br>
+   
+        <h2>Basic settings</h2> 
+        <p><b>Artist</b></p>
+        <p><input type="text" name = "seed_artists" value="" placeholder="Weezer" required/></p>
+        <p><b>Track</b></p>
+        <p><input type="text" name = "seed_tracks" value="" placeholder="Yellow Submarine|The Beatles" required/></p>
+        <p><b>Genre(s)</b></p>
+        <p><input type="text" name = "seed_genres" value="" placeholder="indie,pop" required/></p>
+        <p>A complete list of available genres is <a href="#">here</a>.</p>
+
+        <br><br>
+
+        <h2>Audio features </h2>
+        <p>Hover the name of each feature to see its description, according to <a href="#">Spotify Web API documentation</a>.</p>
+
+        
+        <div class="tooltip"><b>Danceability</b>
+            <span class="tooltiptext">Danceability describes how suitable a track is for dancing based on a combination of musical elements
+            including tempo, rhythm stability, beat strength, and overall regularity. A value of 0.0 is least danceable
+            and 1.0 is most danceable.</span>
+        </div>
+        <p><input type="number" id="min_danceability" name="min_danceability" min="0" max="1" value="0" step="0.01" required/>
+        <label for="min_danceability">min</label></p>
+        <p><input type="number" id="max_danceability" name="max_danceability" min="0" max="1" value="1" step="0.01" required/>
+        <label for="max_danceability">max</label></p>
+        <br>
+	    <div class="tooltip"><b>Instrumentalness</b>
+        <span class="tooltiptext">Predicts whether a track contains no vocals. “Ooh” and “aah” sounds are treated as instrumental in this
+            context. Rap or spoken word tracks are clearly “vocal”. The closer the instrumentalness value is to 1.0,
+            the greater likelihood the track contains no vocal content. Values above 0.5 are intended to represent
+            instrumental tracks, but confidence is higher as the value approaches 1.0.</span>
+        </div>
+        <p><input type="number" id="min_instrumentalness" name="min_instrumentalness" min="0" max="1" value="0" step="0.01" required/>
+        <label for="min_instrumentalness">min</label></p>
+        <p><input type="number" id="max_instrumentalness" name="max_instrumentalness" min="0" max="1" value="1" step="0.01" required/>
+        <label for="max_instrumentalness">max</label></p>
+        <br>
+	    <div class="tooltip"><b>Energy</b>
+        <span class="tooltiptext">Energy is a measure from 0.0 to 1.0 and represents a perceptual measure of intensity and activity.
+            Typically, energetic tracks feel fast, loud, and noisy. For example, death metal has high energy,
+            while a Bach prelude scores low on the scale. Perceptual features contributing to this attribute include
+            dynamic range, perceived loudness, timbre, onset rate, and general entropy.</span>
+        </div>
+        <p><input type="number" id="min_energy" name="min_energy" min="0" max="1" value="0" step="0.01" required/>
+        <label for="min_energy">min</label></p>
+        <p><input type="number" id="max_energy" name="max_energy" min="0" max="1" value="1" step="0.01" required/>
+        <label for="max_energy">max</label></p>
+        <br>
+	    <div class="tooltip"><b>Valence</b>
+        <span class="tooltiptext">A measure from 0.0 to 1.0 describing the musical positiveness conveyed by a track. Tracks with high valence
+            sound more positive (e.g. happy, cheerful, euphoric), while tracks with low valence sound more negative
+            (e.g. sad, depressed, angry).</span>
+        </div>
+        <p><input type="number" id="min_valence" name="min_valence" min="0" max="1" value="0" step="0.01" required/>
+        <label for="min_valence">min</label></p>
+        <p><input type="number" id="max_valence" name="max_valence" min="0" max="1" value="1" step="0.01" required/>
+        <label for="max_valence">max</label></p>
+
+        <br><br>
+
+        <h2>Name of your playlist</h2>
+        <p><input type="text" name="playlist_name" required/></p>
+        <p><input type="submit" name="submit" id="submit" value="Create!" /></p>
+        </fieldset>
+    </form>
+    <br>
+	<p>Ewelina Luczak 2021</p>
+</div>
+</body>
+</html>
