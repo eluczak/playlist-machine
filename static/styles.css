@@ -1,99 +1,73 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;600&display=swap');
-
-h1 {
-	color:orange;
+.title {
+    font-weight: bold;
+    background: -webkit-linear-gradient(70deg,#0b83bd,#cc0adc);
+        background-clip: border-box;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -webkit-box-decoration-break: clone;
 }
 
-fieldset {
-	padding:2em;
-	border-radius: 0.3em;
-	background-color: rgba(255, 255, 255, 0.65);
-	border: 1px solid #bc7e66;
+.align-left {
+    text-align: left;
 }
 
+.align-right {
+    text-align: right;
+}
+
+strong {
+    color: black;
+    font-weight: bold;
+}
+
+h2 {
+    color: black;
+    font-weight: bold;
+}
 form input[type="text"],
 form input[type="number"] {
 	background: white;
 		border: solid 1px #d2d7dc;
 		border-radius: 0.35em;
-		width: 80%;
+		width: 30%;
 		height: 2em;
 		padding: 5px;
 }
 
-form input[type="submit"] {
-	color: #bc7e66;
-		background: none;
-		border: solid 1px #bc7e66;
-		border-radius: 0.35em;
-		padding: 1em 2em 1em 2em;
-		transition: color 0.1s ease-in-out, border-color 0.1s ease-in-out, background-color 0.1s ease-in-out;
-		
-	}
 
+.button {
+	color: white;
+    font-weight: bold;
+	padding: 1em 2em 1em 2em;
+	transition: background-color 0.1s ease-in-out;
+    border: none;
+}
 
-input[type="submit"]:hover {
-	color: #f35858;
-	background: rgba(255, 255, 255, 0.8);
-	border-color: rgba(243, 88, 88, 0.5);
+.button_save {
+    background: #10C231;
+}
+
+.button_save:hover {
+	background: #09db22;
+}
+
+.button_back {
+    background: #0b83bd;
+}
+
+.button_back:hover {
+	background: #14b1e0;
 }
 
 body {
-	font-family: Open Sans;
-	background-image: url("assets/images/overlay.png"), linear-gradient(75deg, #FF7088 15%, #F2B69D 55%)
+	font-family: sans-serif;
+    line-height: 1.5;
+	background: #ecf1f2;
+    color: #444;
 }
+
 .content_area {
-	margin-left: 25%;
-	margin-right: 25%;
-	background-color: none;
-	padding: 5em;
-	border-radius: 0.35em;
+	margin-left: 30%;
 }
 
-
-/* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 500px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-}
-
-/* Tooltip arrow */
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-} 
