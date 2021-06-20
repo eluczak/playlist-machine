@@ -52,14 +52,10 @@ def preview():
                                   data={'seed_artists': artist_name_to_id(request.form['seed_artists']),
                                         'seed_tracks': track_name_to_id(request.form['seed_tracks']),
                                         'seed_genres': request.form['seed_genres'],
-                                        'min_danceability': request.form['min_danceability'],
-                                        'min_instrumentalness': request.form['min_instrumentalness'],
-                                        'min_energy': request.form['min_energy'],
-                                        'min_valence': request.form['min_valence'],
-                                        'max_danceability': request.form['max_danceability'],
-                                        'max_instrumentalness': request.form['max_instrumentalness'],
-                                        'max_energy': request.form['max_energy'],
-                                        'max_valence': request.form['max_valence']
+                                        'target_danceability': request.form['danceability'],
+                                        'target_instrumentalness': request.form['instrumentalness'],
+                                        'target_energy': request.form['energy'],
+                                        'target_valence': request.form['valence']
                                         })
 
     for i in range(len(recommendations.data['tracks'])):
