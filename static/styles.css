@@ -44,11 +44,11 @@ form input[type="number"] {
     border: none;
 }
 
-.button_save {
+.button_submit {
     background: #10C231;
 }
 
-.button_save:hover {
+.button_submit:hover {
 	background: #09db22;
 }
 
