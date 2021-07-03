@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, session, redirect, request
 from flask_oauthlib.client import OAuth
 from functions import artist_name_to_id, track_name_to_id
 from api_keys import *
+import json
 
 app = Flask(__name__)
 app.debug = True
@@ -12,7 +13,7 @@ spotify = oauth.remote_app(
     'spotify',
     consumer_key=SPOTIFY_APP_ID,
     consumer_secret=SPOTIFY_APP_SECRET,
-    request_token_params={'scope': 'playlist-modify-public'},
+    request_token_params={'scope': 'playlist-modify-public playlist-modify-private'},
     base_url='https://accounts.spotify.com',
     request_token_url=None,
     access_token_url='/api/token',
@@ -55,7 +56,8 @@ def preview():
                                         'target_danceability': request.form['danceability'],
                                         'target_instrumentalness': request.form['instrumentalness'],
                                         'target_energy': request.form['energy'],
-                                        'target_valence': request.form['valence']
+                                        'target_valence': request.form['valence'],
+                                        'limit': '10'
                                         })
 
     for i in range(len(recommendations.data['tracks'])):
@@ -69,9 +71,13 @@ def preview():
 
 
 @app.route('/saved', methods=['GET', 'POST'])
-def save_playlist():
-    return render_template("saved/index.html")
+def save_playlist(name="playlist_name"):
+    name = request.form['playlist_name']
+    username = "9n5qrtlstv47cqb0z3ezfoa2a"
+    request1 = spotify.post('https://api.spotify.com/v1/users/' + username + '/playlists',
+                        data={'name': name, 'description': 'a playlist created using Playlist Machine'}, format='json')
 
+    return render_template("saved/index.html")
 
 @spotify.tokengetter
 def get_spotify_oauth_token():
