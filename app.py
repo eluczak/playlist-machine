@@ -13,7 +13,7 @@ spotify = oauth.remote_app(
     'spotify',
     consumer_key=SPOTIFY_APP_ID,
     consumer_secret=SPOTIFY_APP_SECRET,
-    request_token_params={'scope': 'playlist-modify-public playlist-modify-private'},
+    request_token_params={'scope': 'playlist-modify-public playlist-modify-private user-read-private'},
     base_url='https://accounts.spotify.com',
     request_token_url=None,
     access_token_url='/api/token',
@@ -73,8 +73,10 @@ def preview():
 @app.route('/saved', methods=['GET', 'POST'])
 def save_playlist(name="playlist_name"):
     name = request.form['playlist_name']
-    username = "9n5qrtlstv47cqb0z3ezfoa2a"
-    request1 = spotify.post('https://api.spotify.com/v1/users/' + username + '/playlists',
+    user = spotify.get('https://api.spotify.com/v1/me')
+    user_id = user.data['id']
+
+    spotify.post('https://api.spotify.com/v1/users/' + user_id + '/playlists',
                         data={'name': name, 'description': 'a playlist created using Playlist Machine'}, format='json')
 
     return render_template("saved/index.html")
