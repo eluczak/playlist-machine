@@ -11,23 +11,12 @@
         <h1><span class="title">Make me a playlist...</span></h1>
         <p>
             <label for="seed_artists"><strong>...with artists like:</strong></label><br>
-            <input type="text" name="seed_artists" id="seed_artists" placeholder="Weezer" required/>
+            <input type="text" class="text_input" name="seed_artists" id="seed_artists" placeholder="Weezer" required/>
         </p>
 
         <p>
             <label for="seed_tracks"><strong>...tracks like:</strong></label><br>
-            <input type="text" name="seed_tracks" id="seed_tracks" placeholder="Yellow Submarine|The Beatles" required/>
-        </p>
-
-        <p>
-            <label for="seed_genres"><strong>...and genre:</strong></label><br>
-            <input type="text" name="seed_genres" list="seed_genres" id="seed_genre_choice" name="seed_genre_choice"
-                   placeholder="indie" required />
-            <datalist id="seed_genres">
-            {% for genre in available_genres %}
-                <option value="{{ genre }}">
-            {% endfor %}
-            </datalist>
+            <input type="text" class="text_input" name="seed_tracks" id="seed_tracks" placeholder="Yellow Submarine|The Beatles" required/>
         </p>
 
         <label><strong>...which is:</strong></label>
@@ -82,7 +71,15 @@
 
         </table>
 
-        <br>
+        <p>
+        <label><strong>choose a genre:</strong></label><br>
+        <select name="seed_genres" class="text_input" id="seed_genres" required>
+
+        {% for genre in available_genres %}
+            <option class="text_input" value="{{ genre }}">{{ genre }}</option>
+        {% endfor %}
+        </select>
+        </p>
 
         <p><input class="button button_submit" type="submit" name="submit" id="submit" value="Preview" /></p>
 
