@@ -25,13 +25,11 @@ h2 {
     color: black;
     font-weight: bold;
 }
-form input[type="text"],
-form input[type="number"] {
+.text_input {
 	background: white;
 		border: solid 1px #d2d7dc;
 		border-radius: 0.35em;
 		width: 30%;
-		height: 2em;
 		padding: 5px;
 }
 
@@ -42,6 +40,7 @@ form input[type="number"] {
 	padding: 1em 2em 1em 2em;
 	transition: background-color 0.1s ease-in-out;
     border: none;
+    border-radius: 0.2em;
 }
 
 .button_submit {
