@@ -42,12 +42,13 @@ def generator():
 
     return render_template("machine/index.html")
 
-
 @app.route('/preview', methods=['GET', 'POST'])
 def preview():
 
-    playlist = []
-    playlist_preview = []
+
+    playlist_ids = []
+    playlist_tracks = []
+    playlist_artists = []
 
     recommendations = spotify.get('https://api.spotify.com/v1/recommendations',
                                   data={'seed_artists': artist_name_to_id(request.form['seed_artists']),
@@ -61,13 +62,14 @@ def preview():
                                         })
 
     for i in range(len(recommendations.data['tracks'])):
-        playlist.append(recommendations.data['tracks'][i]['uri'])
-        playlist_preview.append(recommendations.data['tracks'][i]['name'] + " - " +
-                                recommendations.data['tracks'][i]['artists'][0]['name'])
+        playlist_ids.append(recommendations.data['tracks'][i]['uri'])
+        playlist_tracks.append(recommendations.data['tracks'][i]['name'])
+        playlist_artists.append(recommendations.data['tracks'][i]['artists'][0]['name'])
 
     return render_template("preview/index.html",
-                           playlist_preview=playlist_preview,
-                           playlist=playlist)
+                           playlist_ids=playlist_ids,
+                           playlist_tracks=playlist_tracks,
+                           playlist_artists=playlist_artists)
 
 
 @app.route('/saved', methods=['GET', 'POST'])
@@ -76,10 +78,18 @@ def save_playlist(name="playlist_name"):
     user = spotify.get('https://api.spotify.com/v1/me')
     user_id = user.data['id']
 
-    spotify.post('https://api.spotify.com/v1/users/' + user_id + '/playlists',
-                        data={'name': name, 'description': 'a playlist created using Playlist Machine'}, format='json')
+    # create playlist
+    create_playlist = spotify.post('https://api.spotify.com/v1/users/' + user_id + '/playlists',
+                        data={'name': name, 'description': 'a playlist created with Playlist Machine'}, format='json')
+    playlist_id = create_playlist.data['id']
 
-    return render_template("saved/index.html")
+    # add songs to a playlist
+    url = 'https://api.spotify.com/v1/playlists/' + playlist_id + '/tracks'
+    list_of_tracks = request.form.getlist('list_of_tracks')
+    data = {"uris": list_of_tracks}
+    spotify.post(url=url, data=data, format='json')
+
+    return render_template("saved/index.html", playlist_id = playlist_id)
 
 @spotify.tokengetter
 def get_spotify_oauth_token():
