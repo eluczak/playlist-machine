@@ -40,7 +40,11 @@ def generator():
     resp = spotify.authorized_response()
     session['oauth_token'] = (resp['access_token'], '')
 
-    return render_template("machine/index.html")
+    available_genres = spotify.get('https://api.spotify.com/v1/recommendations/available-genre-seeds')
+    available_genres = available_genres.data['genres']
+
+    return render_template("machine/index.html",
+                           available_genres=available_genres)
 
 @app.route('/preview', methods=['GET', 'POST'])
 def preview():
@@ -70,7 +74,6 @@ def preview():
                            playlist_ids=playlist_ids,
                            playlist_tracks=playlist_tracks,
                            playlist_artists=playlist_artists)
-
 
 @app.route('/saved', methods=['GET', 'POST'])
 def save_playlist(name="playlist_name"):

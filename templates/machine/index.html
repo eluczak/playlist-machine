@@ -21,7 +21,13 @@
 
         <p>
             <label for="seed_genres"><strong>...and genre:</strong></label><br>
-            <input type="text" name="seed_genres" id="seed_genres" placeholder="indie" required/>
+            <input type="text" name="seed_genres" list="seed_genres" id="seed_genre_choice" name="seed_genre_choice"
+                   placeholder="indie" required />
+            <datalist id="seed_genres">
+            {% for genre in available_genres %}
+                <option value="{{ genre }}">
+            {% endfor %}
+            </datalist>
         </p>
 
         <label><strong>...which is:</strong></label>
