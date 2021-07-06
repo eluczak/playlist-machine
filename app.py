@@ -5,7 +5,7 @@ from api_keys import *
 import json
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
 
