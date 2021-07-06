@@ -6,7 +6,7 @@ This is a tool that lets you generate Spotify playlists based on ("inspired by")
 
 Live app: https://playlistmachine.herokuapp.com/
 
-![image-20210706223916368](.\static\assets\images\screenshot.png)
+![screenshot](./static/assets/images/screenshot.png)
 
 ### Running locally
 
