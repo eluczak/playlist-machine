@@ -3,7 +3,7 @@
 {% block content %}
 <p>Done, your playlist has been saved in your Spotify account.</p>
 <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_id }}" width="300" height="380" frameborder="0"
-        allowtransparency="true" allow="encrypted-media"></iframe>
+        allowtransparency="true"></iframe>
 <br>
 <form method=post action="{{ url_for('index') }}">
     <p><input class="button button_submit" type="submit" name="another one" id="another_one" value="Create another one" /></p>
