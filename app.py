@@ -2,9 +2,10 @@ from flask import Flask, render_template, url_for, session, redirect, request
 from flask_oauthlib.client import OAuth
 from functions import artist_name_to_id, track_name_to_id
 from api_keys import *
-import json
+from flask_talisman import Talisman
 
 app = Flask(__name__)
+Talisman(app, content_security_policy=None)
 app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
