@@ -1,25 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../static/styles.css" />
-    <title>Your playlist</title>
-</head>
-<body>
-<div class="content_area">
-    <h2>Your playlist</h2>
-    <p>Feel free to uncheck track(s) you don't like.</p>
-    <form method=post action="{{ url_for('save_playlist') }}">
+{% extends "layout.html" %}
+{% block title %} | Your playlist{% endblock %}
+
+{% block content %}
+<h2>Your playlist</h2>
+<p>Feel free to uncheck track(s) you don't like.</p>
+<form method=post action="{{ url_for('save_playlist') }}">
     {% for i in range(playlist_ids|length) %}
         <input name="list_of_tracks" type="checkbox" value="{{ playlist_ids[i] }}" checked/>{{ playlist_tracks[i] }} - {{ playlist_artists[i] }}<br>
     {% endfor %}
-
-        <p><input type="text" class="text_input" name="playlist_name" placeholder="Playlist Name" required/></p>
-        <p><input class="button button_submit" type="submit" name="button_save" id="button_save" value="Save" /></p>
-    </form>
-    <form method=get action="{{ url_for('index') }}">
-        <p><input class="button button_back" type="button" name="button_back" id="button_back" value="Generate another one" /></p>
-    </form>
-</div>
-</body>
-</html>
+    <p><input type="text" class="text_input" name="playlist_name" placeholder="Playlist Name" required/></p>
+    <p><input class="button button_submit" type="submit" name="button_save" id="button_save" value="Save" /></p>
+</form>
+<form method=get action="{{ url_for('index') }}">
+    <p><input class="button button_back" type="button" name="button_back" id="button_back" value="Generate another one" /></p>
+</form>
+{% endblock %}

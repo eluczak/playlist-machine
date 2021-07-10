@@ -1,19 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../../static/styles.css" />
-    <title>Saved</title>
-</head>
-<body>
-<div class="content_area">
-    <p>Done, your playlist has been saved in your Spotify account.</p>
-    <iframe src="https://open.spotify.com/embed/playlist/{{ playlist_id }}" width="300" height="380" frameborder="0"
-            allowtransparency="true" allow="encrypted-media"></iframe>
-    <br>
-    <form method=post action="{{ url_for('index') }}">
-        <p><input class="button button_submit" type="submit" name="another one" id="another_one" value="Create another one" /></p>
-    </form>
-</div>
-</body>
-</html>
+{% extends "layout.html" %}
+{% block title %} | Saved{% endblock %}
+{% block content %}
+<p>Done, your playlist has been saved in your Spotify account.</p>
+<iframe src="https://open.spotify.com/embed/playlist/{{ playlist_id }}" width="300" height="380" frameborder="0"
+        allowtransparency="true" allow="encrypted-media"></iframe>
+<br>
+<form method=post action="{{ url_for('index') }}">
+    <p><input class="button button_submit" type="submit" name="another one" id="another_one" value="Create another one" /></p>
+</form>
+{% endblock %}
