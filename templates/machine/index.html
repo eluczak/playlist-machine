@@ -6,20 +6,30 @@
 	<title>Playlist machine</title>
 </head>
 <body>
+<div class="header">Home About </div>
 <div class="content_area">
     <form method=post action="{{ url_for('preview') }}">
-        <h1><span class="title">Make me a playlist...</span></h1>
+        <h1><span class="title">Playlist Machine</span></h1>
         <p>
-            <label for="seed_artists"><strong>...with artists like:</strong></label><br>
-            <input type="text" class="text_input" name="seed_artists" id="seed_artists" placeholder="Weezer" required/>
+            <label for="seed_artists">artists like:</label><br>
+            <input type="text" class="text_input" name="seed_artists" id="seed_artists" placeholder="U2" value="U2" required/>
         </p>
 
         <p>
-            <label for="seed_tracks"><strong>...tracks like:</strong></label><br>
-            <input type="text" class="text_input" name="seed_tracks" id="seed_tracks" placeholder="Yellow Submarine|The Beatles" required/>
+            <label for="seed_tracks">tracks like:</label><br>
+            <input type="text" class="text_input" name="seed_tracks" id="seed_tracks" placeholder="Yellow Submarine|The Beatles" value="Yellow Submarine|The Beatles" required/>
         </p>
 
-        <label><strong>...which is:</strong></label>
+        <p>
+        <label>genre:</label><br>
+        <select name="seed_genres" class="text_input genre_input" id="seed_genres" required>
+
+        {% for genre in available_genres %}
+            <option class="text_input genre_input" value="{{ genre }}">{{ genre }}</option>
+        {% endfor %}
+        </select>
+        </p>
+
         <table>
             <tr>
                 <td class="align-right">
@@ -71,20 +81,16 @@
 
         </table>
 
-        <p>
-        <label><strong>choose a genre:</strong></label><br>
-        <select name="seed_genres" class="text_input" id="seed_genres" required>
 
-        {% for genre in available_genres %}
-            <option class="text_input" value="{{ genre }}">{{ genre }}</option>
-        {% endfor %}
-        </select>
-        </p>
 
-        <p><input class="button button_submit" type="submit" name="submit" id="submit" value="Preview" /></p>
+        <p><input class="button button_submit" type="submit" name="submit" id="submit" value="Generate" /></p>
 
     </form>
 
+</div>
+
+<div class="footer">
+    <p class="footer_text">2021 <a href="https://github.com/eluczak" class="footer_text">Ewelina Luczak</a></p>
 </div>
 </body>
 </html>
