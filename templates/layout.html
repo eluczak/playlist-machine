@@ -6,10 +6,15 @@
     <title>Playlist Machine{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div class="header">Home About </div>
+    <div class="header">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
     <div class="content_area">{% block content %}{% endblock %}</div>
     <div class="footer">
-        <p class="footer_text">2021 <a href="https://github.com/eluczak" class="footer_text">Ewelina Luczak</a></p>
+        <p>2021 <a href="https://github.com/eluczak">Ewelina Luczak</a></p>
     </div>
 </body>
 </html>

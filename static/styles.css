@@ -24,6 +24,13 @@ h2 {
     font-weight: bold;
 }
 
+ .header ul li {
+    display: inline-block;
+    padding-left: 10px;
+    /* needed for IE7- */
+    display:inline;
+}
+
 .text_input {
 	background: white;
 		border: solid 1px #d2d7dc;
@@ -172,16 +179,27 @@ body {
     color: white;
     margin: 0;
     padding: 5px;
+    padding-right: 60px;
     text-align: right;
+}
+
+.header a {
+    color: white;
+    text-decoration: none;
 }
 
 .footer {
     margin: 0;
     padding-left: 60px;
-    padding-top: 20px
+    padding-top: 20px;
+    font-size: 10px;
 }
 
-.footer_text {
+.footer p {
     color: #000000;
-    font-size: 10px;
+}
+
+.footer a {
+    color: #b36323;
+    text-decoration: none;
 }
