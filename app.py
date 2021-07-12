@@ -110,6 +110,12 @@ def save_playlist(name="playlist_name"):
 
     return render_template("saved/index.html", playlist_id = playlist_id)
 
+
+@app.route('/about')
+def about():
+    return render_template("about/index.html")
+
+
 @spotify.tokengetter
 def get_spotify_oauth_token():
     return session.get('oauth_token')
