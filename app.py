@@ -1,6 +1,7 @@
-from flask import Flask, render_template, url_for, session, redirect, request
+from flask import Flask, render_template, url_for, session, redirect, request, jsonify
+import spotipy
+from spotipy.oauth2 import SpotifyClientCredentials
 from flask_oauthlib.client import OAuth
-from functions import artist_name_to_id, track_name_to_id
 from api_keys import *
 from flask_talisman import Talisman
 
@@ -9,6 +10,8 @@ Talisman(app, content_security_policy=None)
 app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
+
+spotipy_ = spotipy.Spotify(auth_manager=SpotifyClientCredentials())
 
 spotify = oauth.remote_app(
     'spotify',
@@ -62,6 +65,41 @@ def generator():
     return render_template("machine/index.html",
                            available_genres=available_genres)
 
+
+@app.route("/search/<string:box>")
+def process(box):
+
+    search_limit = 10
+
+    if box == 'artist_names':
+        artists = []
+        name = request.args.get('query')
+        results = spotipy_.search(q='artist:' + name, type='artist', limit=search_limit)
+        items = results['artists']['items']
+        for i in range(len(items)):
+            artist = items[i]
+            # do not rename keys' names! 'value' and 'data' must remain
+            # otherwise autosuggestion field does not work
+            artists.append({'value': str(artist['name']), 'data': str(artist['id'])})
+        # suggestions should look as follows:
+        # suggestions = [{'value': 'artist1','data': '123'}, {'value': 'artist2','data': '456'}]
+        suggestions = artists
+    if box == 'songs':
+        tracks = []
+        name = request.args.get('query')
+        results = spotipy_.search(q='track:' + name, type='track', limit=search_limit)
+        items = results['tracks']['items']
+        for i in range(len(items)):
+            track = items[i]
+            tracks.append({'value': str(track['name'])+" - "+str(track['artists'][0]['name']), 'data': str(track['id'])})
+        suggestions = tracks
+
+    return jsonify({"suggestions": suggestions})
+
+
+
+
+
 @app.route('/preview', methods=['GET', 'POST'])
 def preview():
 
@@ -71,8 +109,8 @@ def preview():
     playlist_artists = []
 
     recommendations = spotify.get('https://api.spotify.com/v1/recommendations',
-                                  data={'seed_artists': artist_name_to_id(request.form['seed_artists']),
-                                        'seed_tracks': track_name_to_id(request.form['seed_tracks']),
+                                  data={'seed_artists': request.form['seed_artists'],
+                                        'seed_tracks': request.form['seed_tracks'],
                                         'seed_genres': request.form['seed_genres'],
                                         'target_danceability': request.form['danceability'],
                                         'target_instrumentalness': request.form['instrumentalness'],
@@ -89,7 +127,8 @@ def preview():
     return render_template("preview/index.html",
                            playlist_ids=playlist_ids,
                            playlist_tracks=playlist_tracks,
-                           playlist_artists=playlist_artists)
+                           playlist_artists=playlist_artists,
+                           suggestion = request.args.get('suggestion'))
 
 @app.route('/saved', methods=['GET', 'POST'])
 def save_playlist(name="playlist_name"):

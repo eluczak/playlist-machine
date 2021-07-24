@@ -1,17 +1,49 @@
 {% extends "layout.html" %}
 {% block title %}{% endblock %}
+{% block head %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.2.26/jquery.autocomplete.min.js"></script>
+{% endblock %}
 {% block content %}
-<form method=post action="{{ url_for('preview') }}">
     <h1><span class="title">Playlist Machine</span></h1>
     <p>
-        <label for="seed_artists">artists like:</label><br>
-        <input type="text" class="text_input" name="seed_artists" id="seed_artists" placeholder="U2" value="U2" required/>
+        <label for="artist_names">artists like:</label><br>
+        <input type="text" class="text_input" name="artist_names" id="autocomplete1"/>
+    </p>
+    <p>
+        <label for="songs">tracks like:</label><br>
+        <input type="text" class="text_input" name="songs" id="autocomplete2"/>
     </p>
 
-    <p>
-        <label for="seed_tracks">tracks like:</label><br>
-        <input type="text" class="text_input" name="seed_tracks" id="seed_tracks" placeholder="Yellow Submarine|The Beatles" value="Yellow Submarine|The Beatles" required/>
-    </p>
+
+  <script>
+  $('#autocomplete1').autocomplete({
+      serviceUrl: '/search/artist_names',
+      dataType: 'json',
+      onSearchComplete: function (query, suggestions) {
+        console.log(query);
+      },
+      onSelect: function (suggestion) {
+            document.getElementById("seed_artists").value = suggestion.data;
+        }
+  });
+
+  $('#autocomplete2').autocomplete({
+      serviceUrl: '/search/songs',
+      dataType: 'json',
+      onSearchComplete: function (query, suggestions) {
+        console.log(query);
+      },
+      onSelect: function (suggestion) {
+            document.getElementById("seed_tracks").value = suggestion.data;
+        }
+  });
+  </script>
+
+
+<form method=post action="{{ url_for('preview') }}">
+        <input type="hidden" name="seed_artists" id="seed_artists" />
+        <input type="hidden" name="seed_tracks" id="seed_tracks" />
 
     <p>
     <label>genre:</label><br>
