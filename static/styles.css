@@ -202,3 +202,15 @@ a {
     color: #09db22;
     text-decoration: none;
 }
+
+.autocomplete-suggestions {
+    color: black;
+    background: white;
+    border-radius: 0.35em;
+    margin-top: 3px
+}
+
+.autocomplete-selected {
+    background: #d2d7dc;
+    border-radius: 0.35em;
+}
