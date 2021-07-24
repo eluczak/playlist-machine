@@ -27,22 +27,17 @@ spotify = oauth.remote_app(
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    return redirect(url_for('login'))
-
-
-@app.route('/login')
-def login():
-    callback = url_for(
-        'generator',
-        _external=True
-    )
-    return spotify.authorize(callback=callback)
-
-
-@app.route('/machine', methods=['GET', 'POST'])
-def generator():
-    resp = spotify.authorized_response()
-    session['oauth_token'] = (resp['access_token'], '')
+#     callback = url_for(
+#         'generator',
+#         _external=True
+#     )
+#     return spotify.authorize(callback=callback)
+#
+#
+# @app.route('/machine', methods=['GET', 'POST'])
+# def generator():
+#     resp = spotify.authorized_response()
+#     session['oauth_token'] = (resp['access_token'], '')
 
     # https://developer.spotify.com/console/get-available-genre-seeds/
     available_genres = ['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient', 'anime', 'black-metal',
