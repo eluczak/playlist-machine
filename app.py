@@ -92,32 +92,25 @@ def process(box):
     return jsonify({"suggestions": suggestions})
 
 
-
-
-
 @app.route('/preview', methods=['GET', 'POST'])
 def preview():
-
-
     playlist_ids = []
     playlist_tracks = []
     playlist_artists = []
 
-    recommendations = spotify.get('https://api.spotify.com/v1/recommendations',
-                                  data={'seed_artists': request.form['seed_artists'],
-                                        'seed_tracks': request.form['seed_tracks'],
-                                        'seed_genres': request.form['seed_genres'],
-                                        'target_danceability': request.form['danceability'],
-                                        'target_instrumentalness': request.form['instrumentalness'],
-                                        'target_energy': request.form['energy'],
-                                        'target_valence': request.form['valence'],
-                                        'limit': '10'
-                                        })
+    recommendations = spotipy_.recommendations(seed_artists=[request.form['seed_artists']],
+                                               seed_genres=[request.form['seed_genres']],
+                                               seed_tracks=[request.form['seed_tracks']],
+                                               target_danceability=request.form['danceability'],
+                                               target_instrumentalness=request.form['instrumentalness'],
+                                               target_energy=request.form['energy'],
+                                               target_valence=request.form['valence'],
+                                               limit=10)
 
-    for i in range(len(recommendations.data['tracks'])):
-        playlist_ids.append(recommendations.data['tracks'][i]['uri'])
-        playlist_tracks.append(recommendations.data['tracks'][i]['name'])
-        playlist_artists.append(recommendations.data['tracks'][i]['artists'][0]['name'])
+    for i in range(len(recommendations['tracks'])):
+        playlist_ids.append(recommendations['tracks'][i]['uri'])
+        playlist_tracks.append(recommendations['tracks'][i]['name'])
+        playlist_artists.append(recommendations['tracks'][i]['artists'][0]['name'])
 
     return render_template("preview/index.html",
                            playlist_ids=playlist_ids,
