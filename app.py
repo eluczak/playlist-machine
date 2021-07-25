@@ -6,7 +6,7 @@ from api_keys import *
 from flask_talisman import Talisman
 
 app = Flask(__name__)
-Talisman(app, content_security_policy=None)
+# Talisman(app, content_security_policy=None)
 app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
@@ -27,17 +27,17 @@ spotify = oauth.remote_app(
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-#     callback = url_for(
-#         'generator',
-#         _external=True
-#     )
-#     return spotify.authorize(callback=callback)
-#
-#
-# @app.route('/machine', methods=['GET', 'POST'])
-# def generator():
-#     resp = spotify.authorized_response()
-#     session['oauth_token'] = (resp['access_token'], '')
+    callback = url_for(
+        'machine',
+        _external=True
+    )
+    return spotify.authorize(callback=callback)
+
+
+@app.route('/machine', methods=['GET', 'POST'])
+def machine():
+    resp = spotify.authorized_response()
+    session['oauth_token'] = (resp['access_token'], '')
 
     # https://developer.spotify.com/console/get-available-genre-seeds/
     available_genres = ['acoustic', 'afrobeat', 'alt-rock', 'alternative', 'ambient', 'anime', 'black-metal',
@@ -120,6 +120,7 @@ def preview():
 
 @app.route('/saved', methods=['GET', 'POST'])
 def save_playlist(name="playlist_name"):
+
     name = request.form['playlist_name']
     user = spotify.get('https://api.spotify.com/v1/me')
     user_id = user.data['id']
