@@ -6,7 +6,7 @@ from api_keys import *
 from flask_talisman import Talisman
 
 app = Flask(__name__)
-# Talisman(app, content_security_policy=None)
+Talisman(app, content_security_policy=None)
 app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
