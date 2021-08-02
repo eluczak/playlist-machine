@@ -1,8 +1,9 @@
 from flask import Flask, render_template, url_for, session, redirect, request, jsonify
 import spotipy
+import os
 from spotipy.oauth2 import SpotifyClientCredentials
 from flask_oauthlib.client import OAuth
-from api_keys import *
+import api_keys
 from flask_talisman import Talisman
 
 app = Flask(__name__)
@@ -10,6 +11,9 @@ Talisman(app, content_security_policy=None)
 app.debug = False
 app.secret_key = 'development'
 oauth = OAuth(app)
+
+SPOTIFY_APP_ID = os.environ["SPOTIPY_CLIENT_ID"] = api_keys.client_id
+SPOTIFY_APP_SECRET = os.environ["SPOTIPY_CLIENT_SECRET"] = api_keys.client_secret
 
 spotipy_ = spotipy.Spotify(auth_manager=SpotifyClientCredentials())
 

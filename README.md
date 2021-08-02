@@ -17,9 +17,8 @@ Live app: https://playlistmachine.herokuapp.com/
 3. In a root directory of the project, create a file `api_keys.py` with a following content:
 
    ```python
-   import os
-   SPOTIFY_APP_ID = os.environ["SPOTIPY_CLIENT_ID"] = "your client id"
-   SPOTIFY_APP_SECRET = os.environ["SPOTIPY_CLIENT_SECRET"] = "your client secret"
+   client_id = "your client id"
+   client_secret = "your client secret"
    ```
 
 
